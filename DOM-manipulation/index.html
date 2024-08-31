@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>DOM Manipulation Example</h1>
+
+    <!-- Buttons for various actions -->
+    <button id="addRowBtn">Add Table Row</button>
+    <button id="deleteRowBtn">Delete Table Row</button>
+    <button id="addScriptBtn">Add Script</button>
+    <button id="deleteScriptBtn">Delete Script</button>
+    <button id="addElementBtn">Add Element</button>
+    <button id="deleteElementBtn">Delete Element</button>
+    <button id="changeCssBtn">Change CSS</button>
+
+    <hr>
+
+    <!-- Table for adding and deleting rows -->
+    <table id="myTable" border="3">
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+        </tr>
+    </table>
+
+    <!-- Container for adding and deleting elements -->
+    <div id="elementContainer"></div>
+
+    <script>
+        // Add a new row to the table
+        document.getElementById('addRowBtn').addEventListener('click', function() {
+            var table = document.getElementById('myTable');
+            var newRow = table.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            cell1.innerHTML = 'New Cell 1';
+            cell2.innerHTML = 'New Cell 2';
+        });
+
+        // Delete the last row from the table
+        document.getElementById('deleteRowBtn').addEventListener('click', function() {
+            var table = document.getElementById('myTable');
+            if (table.rows.length > 1) { // Keep header row
+                table.deleteRow(-1);
+            }
+        });
+
+        // Add a new script element to the document
+        document.getElementById('addScriptBtn').addEventListener('click', function() {
+            var script = document.createElement('script');
+            script.id = 'dynamicScript';
+            script.innerHTML = "console.log('Dynamic script added and executed');";
+            document.body.appendChild(script);
+        });
+
+        // Delete the added script element from the document
+        document.getElementById('deleteScriptBtn').addEventListener('click', function() {
+            var script = document.getElementById('dynamicScript');
+            if (script) {
+                script.remove();
+            }
+        });
+
+        // Add a new element to the container
+        document.getElementById('addElementBtn').addEventListener('click', function() {
+            var container = document.getElementById('elementContainer');
+            var newElement = document.createElement('div');
+            newElement.id = 'newElement';
+            newElement.innerHTML = 'This is a new element';
+            container.appendChild(newElement);
+        });
+
+        // Delete the added element from the container
+        document.getElementById('deleteElementBtn').addEventListener('click', function() {
+            var element = document.getElementById('newElement');
+            if (element) {
+                element.remove();
+            }
+        });
+
+        // Change the CSS of an element
+        document.getElementById('changeCssBtn').addEventListener('click', function() {
+            var container = document.getElementById('elementContainer');
+            container.classList.toggle('highlight');
+        });
+    </script>
+</body>
+</html>
